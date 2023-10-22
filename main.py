@@ -1,11 +1,9 @@
 import flet as ft
 from Machine import Machine
 
-machine: Machine
-click_first = False
-
 
 def main(page: ft.Page):
+    """
     def clicked_word(e):
         global click_first
         if not click_first:
@@ -42,14 +40,17 @@ def main(page: ft.Page):
         instructions_view.controls.append(ft.Text(value=machine.start_machine()))
         page.update()
 
+    machine = Machine()
+    click_first = False
+
+
     state = ft.TextField(hint_text="Состояние")
     letter = ft.TextField(hint_text="Буква")
     replace_letter = ft.TextField(hint_text="Заменяемая буква")
     replace_state = ft.TextField(hint_text="Заменяемое состояние")
     direction = ft.TextField(hint_text="Направление")
 
-    machine = Machine()
-    click_first = False
+
 
     word = ft.TextField(hint_text="Какое слово ебать?")
     instructions_view = ft.Column()
@@ -67,6 +68,66 @@ def main(page: ft.Page):
     )
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(view)
+    """
+
+    def click_word_button(e):
+        ...
+
+    word = ft.TextField(
+        hint_text="Введите слово...",
+        color=ft.colors.WHITE,
+        width=550
+    )
+
+    left_container = ft.Container(
+        content=ft.Column(
+            controls=[
+                ft.Text(
+                    value="Настройка машины",
+                    font_family="Lato",
+                    color=ft.colors.WHITE,
+                    style=ft.TextThemeStyle.TITLE_LARGE
+                ),
+                ft.Row(
+                    controls=[
+                        word,
+                        ft.IconButton(
+                            icon = ft.icons.ADD,
+                            icon_color=ft.colors.BLACK,
+                            bgcolor=ft.colors.WHITE,
+                            on_click=click_word_button
+                        )
+                    ]
+                )
+            ]
+        ),
+        bgcolor=ft.colors.GREY_900,
+        width=625,
+        height=650
+    )
+
+    right_container = ft.Container(
+        content=ft.Column(
+            controls=[
+                ft.Text(
+                    value="Показ машины",
+                    style=ft.TextThemeStyle.TITLE_LARGE,
+                    font_family="Lato"
+                )
+            ]
+        ),
+        bgcolor=ft.colors.WHITE12,
+        width=625,
+        height=650
+    )
+
+
+    page.add(ft.Row(controls=[
+        left_container,
+        right_container
+    ]))
+
+
 
 
 ft.app(target=main)
