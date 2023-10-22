@@ -10,6 +10,7 @@ class Machine:
 
     def set_word(self, word: str):
         self.string = word
+        self.lent = "λ" * self.limits + self.string + "λ" * self.limits
 
     def add_instruction(self, state: str, letter: str, replace_letter: str, direction: str, replace_state: str):
         if direction not in ("R", "L", "E"):
